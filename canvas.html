@@ -1,0 +1,42 @@
+<html>
+<head>
+
+</head>
+<body>
+<div id="menu">
+    <a href="#">home</a>
+    <a href="#">profile</a>
+    <button id="close">close</button>
+</div>
+<h1>Merhaba dunya</h1>
+
+<button id="open"> open </button>
+
+<script>
+    var isMenuOpen = true;
+
+    function open(){
+        isMenuOpen = true;
+        document.getElementById("menu").style.display = "block"
+    }
+    function close(){
+        isMenuOpen = false;
+        document.getElementById("menu").style.display = "none"
+    }
+
+    document.getElementById("close").addEventListener("click",close);
+    document.getElementById("open").addEventListener("click",open);
+</script>
+<style>
+    *{
+        margin: 0;
+    }
+    #menu{
+        width: 100vw;
+        height: 100vh;
+        background-color: bisque;
+        position: fixed;
+    }
+</style>
+</body>
+</html>

@@ -1,56 +1,67 @@
-class Insan{
-     constructor(isim,yas) {
-         // console.log("Insan Constructor");
-         this.isim = isim;
-         this.yas = yas;
-     }
+class Hastane{
+    constructor() {
+        this.kuyrukBasi = null
+        this.hastaSayisi = 0;
+    }
 
-     sayName(){
-         console.log("Benim adim "+ this.isim);
-     }
+    add(hasta){
+        if(this.hastaSayisi === 0){
+            this.kuyrukBasi = hasta;
+        }else{
+            let tmp = this.kuyrukBasi;
+            while (tmp.sonrakiHasta !== null){
+                if(hasta.oncelik > tmp.oncelik){
+                    console.log(tmp === this.kuyrukBasi);
+                    if(tmp === this.kuyrukBasi){
+                        let tmp2 = this.kuyrukBasi
+                        this.kuyrukBasi = hasta
+                        hasta.sonrakiHasta = tmp2
+                    }else{
+
+                    }
+                }
+                tmp = tmp.sonrakiHasta;
+            }
+
+
+            // if(this.kuyrukBasi.oncelik < hasta.oncelik){
+            //     let tmp = this.kuyrukBasi
+            //     this.kuyrukBasi = hasta
+            //     hasta.sonrakiHasta = tmp
+            // }else{
+            //     this.kuyrukBasi.sonrakiHasta = hasta
+            // }
+        }
+        this.hastaSayisi++;
+    }
 }
 
-class Hasta extends Insan{
-    constructor(isim,yas,onceligi) {
-        // console.log("hasta constructor-1");
-        super(isim,yas)
-        // console.log("hasta constructor-2");
-        this.oncelik = onceligi;
+class Hasta{
+    constructor(isim,yas,oncelik) {
+        this.isim = isim
+        this.yas = yas
+        this.oncelik = oncelik
         this.sonrakiHasta = null;
     }
 }
 
-class Doktor extends Insan{
-    constructor(isim,yas,polikinlik) {
-        super(isim,yas)
-        this.polikinlik = polikinlik;
-    }
-}
+let hasta1 = new Hasta("bektas",23,2);
 
+let hastane = new Hastane()
 
-class Fucker extends Insan{
-    constructor(isim,yas) {
-        super(isim,yas);
-    }
-    fuck(insan){
-        console.log("fucker "+ insan.isim + " 'i fuckti");
-    }
-}
+hastane.add(hasta1)
 
+console.log(hastane);
 
-let hasta = new Hasta("alperen",12,2);
-let doktor = new Doktor("Bektas",23,"agrilar ve sancilar")
+let hasta2 = new Hasta("alperen",23,0);
 
+hastane.add(hasta2)
 
-let fucker  = new Fucker("jony",34);
-fucker.fuck(doktor)
-fucker.fuck(hasta)
+console.log(hastane);
 
-let insan = new Insan("göt",23)
+let hasta3 = new Hasta("imge'",23,3);
 
-fucker.fuck(insan)
+hastane.add(hasta3)
 
+console.log(hastane);
 
-// console.log(hasta.isim);
-// hasta.sayName();
-// doktor.sayName()

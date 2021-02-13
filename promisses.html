@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="sayac">0</div>
+<div id="text1">t1</div>
+<div id="text2">t2</div>
+<button id="async">ASYNC</button>
+<button id="sync">SYNC</button>
+<button id="await">AWAIT</button>
+
+
+
+<script>
+    let t1 = document.getElementById("text1")
+    let t2 = document.getElementById("text2")
+    let sayac = document.getElementById("sayac")
+    document.getElementById("sync").addEventListener("click",()=>{
+        t2.textContent = "started"
+        let time = new Date().getTime()
+        while (new Date().getTime() - time < 5000){
+
+        }
+        t1.textContent = "finished"
+    })
+
+    async function runner(){
+        let myPromise = new Promise((resolve, reject) => {
+            t2.textContent = "initinitnintintitnitnitntintintintintintintintintintitnitnti"
+            setTimeout(()=>{
+                if(Math.random() > 0.5){
+                    resolve("finished")
+                }else{
+                    reject("rejected")
+                }
+            },2000)
+        });
+
+        t2.textContent = "Started"
+
+        try{
+            t1.textContent = await myPromise;
+        }catch (e) {
+            t1.textContent = e
+        }
+        t2.textContent = "Started TOO"
+    }
+
+    document.getElementById("await").addEventListener("click",()=>{
+        runner()
+    })
+
+
+    let start = 0
+    setInterval(()=>{
+        start++;
+        sayac.textContent = start;
+    },1000)
+
+    document.getElementById("async").addEventListener("click",()=>{
+        let myPromise = new Promise((resolve, reject) => {
+           setTimeout(()=>{
+               if(Math.random() > 0.5){
+                   resolve("finished")
+               }else{
+                   reject("rejected")
+               }
+           },2000)
+       })
+        t2.textContent = "Started"
+        myPromise.then(s=>{
+            t1.textContent = s
+        });
+        myPromise.catch(e=>{
+            t1.textContent = e
+        })
+    })
+
+
+
+
+</script>
+<style>
+    button:hover{
+        background-color: aqua;
+    }
+    button:active{
+        background-color: rebeccapurple;
+    }
+</style>
+</body>
+</html>

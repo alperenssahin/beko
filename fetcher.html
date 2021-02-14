@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="sayac">0</div>
+<div id="text1">t1</div>
+<div id="text2">t2</div>
+<input type="text" id="username" placeholder="github username">
+<button id="async">ASYNC</button>
+
+
+
+<script>
+    let t1 = document.getElementById("text1")
+    let t2 = document.getElementById("text2")
+    let usernameInput = document.getElementById("username")
+    let sayac = document.getElementById("sayac")
+
+    function update(data=[]){
+        data.forEach(user=>{
+            let dom = document.createElement("h2")
+            dom.textContent = user.login
+            t1.appendChild(dom)
+        });
+    }
+
+    document.getElementById("async").addEventListener("click",()=>{
+        [...t1.childNodes].forEach(s=>s.remove());
+        let job = axios.get(`https://api.github.com/users/${usernameInput.value}/followers`)
+        job.then(s=>{
+            console.log(s.data);
+            update(s.data)
+        })
+        job.catch(e=>{
+            console.log("HATA YAKALANDI");
+            console.log(e);
+        })
+    })
+
+</script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<style>
+    button:hover{
+        background-color: aqua;
+    }
+    button:active{
+        background-color: rebeccapurple;
+    }
+</style>
+</body>
+</html>

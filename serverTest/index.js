@@ -1,12 +1,13 @@
 const express = require('express')
 const app = express()
+const cors = require('cors');
 const fs = require("fs");
 var bodyParser = require('body-parser')
-
 app.use(bodyParser.urlencoded({ extended: false }))
-
-// parse application/json
+app.use(cors());
 app.use(bodyParser.json())
+
+
 
 app.get('/', function (req, res) {
 	console.log("kok")
@@ -50,6 +51,20 @@ app.post('/fiyatlar', function (req, res) {
     }
     res.json(stok[req.body.urun]);
 })
- 
+
+let count = 0;
+
+app.post("/store", function (req, res) {
+    //...database baglantisi
+    count = req.body.count;
+    res.json({status: "done"});
+});
+
+app.get("/count", function (req, res) {
+    //...database baglantisi
+    res.json({myCount: count});
+});
+
+
 console.log("app listening") 
 app.listen(3000)

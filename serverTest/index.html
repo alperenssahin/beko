@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="header">Header</div>
+    <input type="text" id="input">
+<input type="number" id="count">
+
+    <button id="button">URUNU GETIR</button>
+    <h2>Merhaba bektas</h2>
+    <div id="content"></div>
+
+<select id="select">
+    <option>-</option>
+</select>
+<button id="listprice">fiyatlari listele</button>
+<div id="postcontent"></div>
+
+<div id="priceContent"></div>
+
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script>
+    document.getElementById("button").addEventListener("click",()=>{
+        // axios.get(`http://127.0.0.1:3000/alperen/${document.getElementById("input").value}`).then(s=>{
+        //     document.querySelector("#content").innerHTML = s.data
+        // })
+        axios.post("http://127.0.0.1:3000/alperen",{
+            count:document.getElementById("count").value,
+            benimanahtarim:document.getElementById("input").value}).then(s=>{
+            document.querySelector("#postcontent").innerHTML = s.data
+        })
+    })
+
+    axios.get("http://127.0.0.1:3000/urun",).then(s=>{
+        s.data.urunler.forEach(urun=>{
+            let option = document.createElement("option")
+            option.textContent = urun
+            option.value = urun
+            document.getElementById("select").appendChild(option);
+        })
+    })
+
+    document.getElementById("listprice").addEventListener("click",()=>{
+        // axios.get(`http://127.0.0.1:3000/alperen/${document.getElementById("input").value}`).then(s=>{
+        //     document.querySelector("#content").innerHTML = s.data
+        // })
+        axios.post("http://127.0.0.1:3000/fiyatlar",{
+            urun:document.getElementById("select").value}).then(s=>{
+            console.log(s.data);
+            document.getElementById("priceContent").textContent = JSON.stringify(s.data)
+        })
+    })
+
+
+
+</script>
+
+</body>
+</html>

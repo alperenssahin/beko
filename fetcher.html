@@ -5,11 +5,11 @@
     <title>Title</title>
 </head>
 <body>
-<div id="sayac">0</div>
-<div id="text1">t1</div>
-<div id="text2">t2</div>
-<input type="text" id="username" placeholder="github username">
-<button id="async">ASYNC</button>
+    <div id="sayac">0</div>
+    <div id="text1">t1</div>
+    <div id="text2">t2</div>
+    <input type="text" id="username" placeholder="github username">
+    <button id="async">ASYNC</button>
 
 
 
@@ -28,15 +28,22 @@
     }
 
     document.getElementById("async").addEventListener("click",()=>{
+
         [...t1.childNodes].forEach(s=>s.remove());
+
+        axios.post("https://api.github.com/users/alperenssahin/followers",{data:"allah"})
+
         let job = axios.get(`https://api.github.com/users/${usernameInput.value}/followers`)
+
         job.then(s=>{
             console.log(s.data);
             update(s.data)
         })
-        job.catch(e=>{
+
+        job.catch(e => {
+            alert("daha sonra yeniden dene")
             console.log("HATA YAKALANDI");
-            console.log(e);
+            console.warn(e);
         })
     })
 

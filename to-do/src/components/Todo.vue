@@ -8,11 +8,16 @@
           Task :
           <input type="text" v-model="inputValue">
         </label>
+        <label v-if="inputValue !== ''">
+          Time :
+          <input type="datetime-local" v-model="time">
+        </label>
+        {{time}}
         <Button v-if="inputValue!=='' " :click-handler="addNewTask">Add</Button>
       </div>
     </div>
     <div class="task-container">
-      <Task v-for="(item,index) in  tasks" :key="index" :task-title="item" :number="index+1"/>
+      <Task v-for="(item,index) in  tasks" :key="index" :obj="item" :number="index+1"/>
     </div>
   </div>
 </div>
@@ -22,6 +27,8 @@
 import Header from "@/components/Header";
 import Button from "@/components/Button";
 import Task from "@/components/Task";
+import { v4 as uuidv4 } from 'uuid';
+
 export default {
   name: "Todo",
   components: {Task, Button, Header},
@@ -29,7 +36,8 @@ export default {
     return{
       inputIsActive:false,
       inputValue:"",
-      tasks:[]
+      tasks:[],
+      time:""
     }
   },
   methods:{
@@ -37,10 +45,21 @@ export default {
       this.inputIsActive = !this.inputIsActive
     },
     addNewTask(){
-      this.tasks.push(this.inputValue)
+      let obj = {
+        text: this.inputValue,
+        time: new Date(this.time),
+        isDone:false,
+        uuid: uuidv4()
+      }
+      this.tasks.push(obj)
+      this.tasks.sort((a, b) => a.time.getTime() - b.time.getTime())
       this.inputValue = ""
+      this.time = ""
       this.inputIsActive = false
     },
+    mSort(){
+      return
+    }
   }
 }
 </script>
@@ -72,7 +91,7 @@ export default {
   border-bottom: 2px solid cornflowerblue;
 }
 .fix{
-  height: 100px;
+  height: 200px;
 }
 
 

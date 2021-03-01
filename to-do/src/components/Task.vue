@@ -1,7 +1,10 @@
 <template>
 <div class="task-container">
   <div>
-    {{number}} - {{taskTitle}}
+    {{number}} - {{obj.text}}
+  </div>
+  <div>
+   bitirme zamani : {{obj.time.toLocaleDateString()}} - {{obj.time.toLocaleTimeString()}}
   </div>
 </div>
 </template>
@@ -10,7 +13,7 @@
 export default {
   name: "Task",
   props:{
-    taskTitle:String,
+    obj:Object,
     number:Number,
   }
 }
@@ -21,11 +24,13 @@ export default {
   display: grid;
   align-content: center;
   background-color: deeppink;
+  grid-template-columns: 1fr auto;
   color: whitesmoke;
   height: 40px;
   margin-bottom: 5px;
   margin-top: 5px;
   border-radius: 10px;
   padding-left: 10px;
+  padding-right: 10px;
 }
 </style>

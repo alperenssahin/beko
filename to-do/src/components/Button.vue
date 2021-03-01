@@ -1,7 +1,7 @@
 <template>
   <div class="button"
        role="button"
-       tabindex="0" @click="clickHandler">
+       tabindex="0" @click="clickHandler" @keypress.enter="clickHandler">
     <slot></slot>
   </div>
 </template>

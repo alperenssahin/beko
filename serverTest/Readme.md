@@ -89,6 +89,7 @@ dosya servis etme
 
 dosya degistirip yayinlama
 
+    const fs = require("fs");
     app.post('/alperen', function (req, res) {
         let html = fs.readFileSync("/Users/alperensahin/Desktop/beko/serverTest/alperen.html",{encoding:"utf-8"})
         html = html.replace("xxxxx",req.body.benimanahtarim)

@@ -1,6 +1,11 @@
 //import firebase
 
 export class ProductService{
+    static async setProduct(sector,product){
+        console.log(sector);
+        console.log(product);
+        //firebase
+    }
     static async getBuildingProduct(){
         //firebase await
         let data = {

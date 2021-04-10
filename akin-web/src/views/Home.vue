@@ -1,5 +1,9 @@
 <template>
   <div class="home">
+    <div>{{$store.getters.getLangItem("home")}}</div>
+    <a href="#" @click="setLanguage('tr')">tr</a>
+    <br>
+    <a href="#" @click="setLanguage('en')">en</a>
     <ProductListView :product-list="productList"></ProductListView>
   </div>
 </template>
@@ -11,6 +15,15 @@ export default {
   name: 'Home',
   components: {
     ProductListView,
+  },
+  methods:{
+    setLanguage(lang){
+      localStorage.setItem("language",lang)
+      location.reload()
+    },
+    getLanguage(){
+      return localStorage.getItem("language")
+    }
   },
   data(){
     return{

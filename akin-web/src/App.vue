@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <div id="nav" :lang="$store.state.currentLanguage">
+      <router-link to="/">{{$store.getters.getLangItem("home")}}</router-link> |
+      <router-link to="/about">{{$store.getters.getLangItem("about")}}</router-link>
     </div>
     <router-view/>
   </div>

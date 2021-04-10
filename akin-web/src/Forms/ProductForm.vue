@@ -3,14 +3,15 @@
     <label>
       Name
     <input type="text" v-model="product.name"> </label>
-
     {{product.name}}
     <button @click="load">Load</button>
   </div>
 </template>
 
 <script>
+
 import {ProductService} from "@/Service/ProductService";
+
 export default {
   name: "ProductForm",
   props: {

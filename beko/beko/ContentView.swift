@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var isAuthenticate = false
+    @State var isAuthenticate = true
     
     var body: some View {
         VStack{
